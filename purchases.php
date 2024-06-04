@@ -21,6 +21,14 @@
             width: 100%; /* Ensure cards take full width of their container */
             transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add smooth transitions */
             background-color: #ecffed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            padding: 10px;
         }
 
         .card:hover {
@@ -29,9 +37,9 @@
         }
 
         .card-img-top {
-            width: 100%; /* Ensure the image fills its container */
-            height: auto; /* Maintain aspect ratio */
-            object-fit: cover; /* Ensure the image covers the entire container */
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
         }
 
         /* Full width for purchased items section */
@@ -40,13 +48,18 @@
             position: relative; /* Not fixed */
             top: 0; /* Reset top */
             right: 0; /* Reset right */
-            background-color: #fff;
-            border: 1px solid #ddd;
             padding: 10px;
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
             z-index: 999;
             margin-top: 20px; /* Adjust as needed */
             overflow-y: auto; /* Enable vertical scrollbar */
+        }
+        body {
+            background-image: url('https://i.pngimg.me/thumb/f/720/5996145641783296.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-color: #f8f9fa;
         }
     </style>
 </head>
@@ -86,10 +99,12 @@
         }
 
         // Fetch purchased items from the purchases table
-        $sql = "SELECT * FROM purchases ORDER BY purchase_date DESC";
+        $sql = "SELECT * FROM purchases ORDER BY date_added DESC";
         $result = $conn->query($sql);
 
-        if ($result->num_rows > 0) {
+        if ($result === false) {
+            echo "Error: " . $conn->error;
+        } elseif ($result->num_rows > 0) {
             // Output data of each row
             while($row = $result->fetch_assoc()) {
                 // Display each purchased item as a card

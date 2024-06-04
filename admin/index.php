@@ -9,7 +9,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 }
  
 // Include config file
-require_once $_SERVER['DOCUMENT_ROOT'] . "/balsa-pdo-crud/admin/db/config.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/balsa-pdo-final/admin/db/config.php";
  
 // Define variables and initialize with empty values
 $username = $password = "";
